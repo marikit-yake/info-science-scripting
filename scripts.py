@@ -1,20 +1,21 @@
 import csv
 
 
-# Loads in CSV data from a specified filepath
-def openSurveyCSV(filePath: str) -> str:
-    
+def openSurveyCSV(filePath: str, fieldname:str = None) -> str:
     # I/O for our survey CSV file
     with open(filePath, "r") as csvfile:
         
         # Returns a dictionary for more explicit column names
         reader = csv.DictReader(csvfile)
         
-        # Prints each case in our data set 
-        results = [row for row in reader]    # Modify this line to capture each specific field
-        # Example, 
-        #results = [row["transfer"] for row in reader] to capture a list of transfer responses
-        return results
+        # If a fieldname is specified, this will return that csv column
+        if fieldname:
+            results = [row[fieldname] for row in reader]
+            return results
+        else:
+            # Prints each case in our data set 
+            results = [row for row in reader]
+            return results
 
 
 # Standardizes pronoun strings for analysis
