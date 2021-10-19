@@ -1,3 +1,6 @@
+import csv
+
+
 # Standardizes pronoun strings for analysis
 def pronounClean(pronouns:str) -> str:
     pronounsCleaned = pronouns.lower().strip()
@@ -17,3 +20,17 @@ def genderClean(gender:str) -> str:
     if "(?)" in genderCleaned:
         genderCleaned = genderCleaned.replace("(?)", "")
     return genderCleaned
+
+
+# Loads in CSV data from a specified filepath
+def openSurveyCSV(filePath: str) -> str:
+    
+    # I/O for our survey CSV file
+    with open(filePath, "r") as csvfile:
+        
+        # Returns a dictionary for more explicit column names
+        reader = csv.DictReader(csvfile)
+        
+        # Prints each case in our data set 
+        for row in reader:
+            print(row)    # Modify this line to capture each specific field
