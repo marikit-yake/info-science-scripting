@@ -16,6 +16,7 @@ def openSurveyCSV(filePath: str) -> str:
         #results = [row["transfer"] for row in reader] to capture a list of transfer responses
         return results
 
+
 # Standardizes pronoun strings for analysis
 def pronounClean(pronouns:str) -> str:
     pronounsCleaned = pronouns.lower().strip()
