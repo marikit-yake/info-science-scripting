@@ -1,11 +1,12 @@
 # Standardizes pronoun strings for analysis
 def pronounClean(pronouns:str) -> str:
+    pronouns = pronouns.lower().strip()
     if "," in pronouns:
-        return pronouns.lower().strip().replace(",", "/")
+        return pronouns.replace(",", "/")
     elif "/" not in pronouns:
-        return pronouns.lower().strip().replace(" ", "/")
+        return pronouns.replace(" ", "/")
     else:
-        return pronouns.lower().strip().replace(" ", "")
+        return pronouns.replace(" ", "")
 
 
 #Standardizes gender identity strings for analysis
