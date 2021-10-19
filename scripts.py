@@ -1,6 +1,21 @@
 import csv
 
 
+# Loads in CSV data from a specified filepath
+def openSurveyCSV(filePath: str) -> str:
+    
+    # I/O for our survey CSV file
+    with open(filePath, "r") as csvfile:
+        
+        # Returns a dictionary for more explicit column names
+        reader = csv.DictReader(csvfile)
+        
+        # Prints each case in our data set 
+        results = [row for row in reader]    # Modify this line to capture each specific field
+        # Example, 
+        #results = [row["transfer"] for row in reader] to capture a list of transfer responses
+        return results
+
 # Standardizes pronoun strings for analysis
 def pronounClean(pronouns:str) -> str:
     pronounsCleaned = pronouns.lower().strip()
@@ -22,15 +37,16 @@ def genderClean(gender:str) -> str:
     return genderCleaned
 
 
-# Loads in CSV data from a specified filepath
-def openSurveyCSV(filePath: str) -> str:
+# Counts number of transfer and non-transfer students
+def transferCount(transferStatus):
+    transferCounter = 0
+    nonTransferCounter = 0
     
-    # I/O for our survey CSV file
-    with open(filePath, "r") as csvfile:
+    for status in transferStatus:
+        if status == "Yes":
+            transferCounter += 1
+        else:
+            nonTransferCounter += 1
         
-        # Returns a dictionary for more explicit column names
-        reader = csv.DictReader(csvfile)
-        
-        # Prints each case in our data set 
-        for row in reader:
-            print(row)    # Modify this line to capture each specific field
+    print(f"Number of Transfer Students: {transferCounter}")
+    print(f"Number of non-Transfer Students: {nonTransferCounter}")
