@@ -1,21 +1,7 @@
-import csv
+import pandas as pd
 
 
-def openSurveyCSV(filePath: str, fieldname:str = None) -> str:
-    # I/O for our survey CSV file
-    with open(filePath, "r") as csvfile:
-        
-        # Returns a dictionary for more explicit column names
-        reader = csv.DictReader(csvfile)
-        
-        # If a fieldname is specified, this will return that csv column
-        if fieldname:
-            results = [row[fieldname] for row in reader]
-            return results
-        else:
-            # Prints each case in our data set 
-            results = [row for row in reader]
-            return results
+filePath = "./survey-data/survey-response-data.csv"
 
 
 # Standardizes pronoun strings for analysis
@@ -39,16 +25,8 @@ def genderClean(gender:str) -> str:
     return genderCleaned
 
 
-# Counts number of transfer and non-transfer students
-def transferCount(transferStatus):
-    transferCounter = 0
-    nonTransferCounter = 0
-    
-    for status in transferStatus:
-        if status == "Yes":
-            transferCounter += 1
-        else:
-            nonTransferCounter += 1
-        
-    print(f"Number of Transfer Students: {transferCounter}")
-    print(f"Number of non-Transfer Students: {nonTransferCounter}")
+# Cleans and exports survey-data
+survey_df = pd.read_csv(filePath, infer_datetime_format=True)
+survey_df["gender"] = survey_df["gender"].apply(genderClean)
+survey_df["pronouns"] = survey_df["pronouns"].apply(pronounClean)
+survey_df.to_csv("./survey-data/survey-data-cleaned.csv")
