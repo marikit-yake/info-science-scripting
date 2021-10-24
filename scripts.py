@@ -8,20 +8,23 @@ filePath = "./survey-data/survey-response-data.csv"
 def pronounClean(pronouns:str) -> str:
     pronounsCleaned = pronouns.lower().strip()
     if "," in pronouns:
-        return pronouns.replace(",", "/")
+        pronounsCleaned = pronounsCleaned.replace(",", "/")
+        return pronounsCleaned.replace(" ", "")
     elif "/" not in pronouns:
-        return pronouns.replace(" ", "/")
+        pronounsCleaned = pronounsCleaned.replace(" ", "/")
+        return pronounsCleaned.replace(" ", "")
     else:
-        return pronouns.replace(" ", "")
-
+        return pronounsCleaned.replace(" ", "")
 
 #Standardizes gender identity strings for analysis
 def genderClean(gender:str) -> str:
     genderCleaned = gender.lower().strip()
     if " " in genderCleaned:
         genderCleaned = genderCleaned.replace(" ", "")
-    if "(?)" in genderCleaned:
+    elif "(?)" in genderCleaned:
         genderCleaned = genderCleaned.replace("(?)", "")
+    elif "," in genderCleaned:
+        genderCleaned = genderCleaned.replace(",", "/")
     return genderCleaned
 
 
