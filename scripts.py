@@ -22,7 +22,6 @@ def genderClean(gender:str) -> str:
     if " " in genderCleaned:
         genderCleaned = genderCleaned.replace(" ", "")
     elif "(?)" in genderCleaned:
-        genderCleaned = genderCleaned.replace(" ", "")
         genderCleaned = genderCleaned.replace("(?)", "")
         return genderCleaned.replace(" ", "")
     elif "," in genderCleaned:
